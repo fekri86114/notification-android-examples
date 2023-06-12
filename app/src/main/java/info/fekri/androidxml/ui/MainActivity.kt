@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         // show notification when clicked on button
         binding.btnOpenNotification.setOnClickListener { view ->
 
-
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             val notification = NotificationCompat
                 .Builder(this, CHANNEL_ID)
