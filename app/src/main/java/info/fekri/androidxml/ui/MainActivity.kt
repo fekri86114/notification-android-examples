@@ -1,48 +1,90 @@
 package info.fekri.androidxml.ui
 
-import android.app.NotificationManager
-import android.graphics.BitmapFactory
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.core.view.WindowCompat
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import info.fekri.androidxml.R
 import info.fekri.androidxml.databinding.ActivityMainBinding
-import info.fekri.androidxml.ext.CHANNEL_ID
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbarMain)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.frame_main_container) as NavHostFragment
+        navController = navHostFragment.findNavController()
+    }
 
-        // show notification when clicked on button
-        binding.btnOpenNotification.setOnClickListener { view ->
+    override fun onResume() {
+        super.onResume()
+        actionBarTopSetup()
+        navigationDrawerSetup()
+        bottomNavigationSetup()
+    }
 
-            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            val notification = NotificationCompat
-                .Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("New message!")
-                .setContentText("You got a new message from Mohammad Reza Fekri.")
-                .setStyle(
-                    NotificationCompat.BigPictureStyle()
-                        .bigPicture(
-                            BitmapFactory.decodeResource(resources, R.drawable.img_person)
-                        )
-                )
-                .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .build()
-
-            notificationManager.notify((1..100).random(), notification)
-
+    private fun bottomNavigationSetup() {
+        binding.bottomNavigationMain.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.first_screen -> navController.navigate(R.id.first_screen)
+                R.id.second_screen -> navController.navigate(R.id.second_screen)
+            }
+            true
         }
+        binding.bottomNavigationMain.setOnItemReselectedListener { /*do-nothing*/ }
+    }
 
+    private fun navigationDrawerSetup() {
+        binding.navigationViewMain.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.search_bar -> {
+                    binding.draweLayoutMain.closeDrawer(GravityCompat.START, true)
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com/")))
+                }
+
+                R.id.first_screen -> {
+                    binding.draweLayoutMain.closeDrawer(GravityCompat.START, true)
+                    navController.navigate(R.id.first_screen)
+                }
+
+                R.id.second_screen -> {
+                    binding.draweLayoutMain.closeDrawer(GravityCompat.START, true)
+                    navController.navigate(R.id.second_screen)
+                }
+            }
+            true
+        }
+    }
+
+    private fun actionBarTopSetup() {
+        val actionBarDrawerToggle = ActionBarDrawerToggle(
+            this,
+            binding.draweLayoutMain,
+            binding.toolbarMain,
+            R.string.open_drawer,
+            R.string.close_drawer
+        )
+        actionBarDrawerToggle.syncState()
+        actionBarDrawerToggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
+        binding.draweLayoutMain.addDrawerListener(actionBarDrawerToggle)
     }
 
 }

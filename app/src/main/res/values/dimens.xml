@@ -1,3 +1,16 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <!--  Customize your margin sizes here  -->
+    <dimen name="margin_0x">4dp</dimen>
+    <dimen name="margin_1x">8dp</dimen>
+    <dimen name="margin_2x">16dp</dimen>
+    <dimen name="margin_3x">24dp</dimen>
+    <dimen name="margin_4x">32dp</dimen>
+
+    <!--  Customize your text-size here  -->
+    <dimen name="text_size_normal">15sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_ext_large">18sp</dimen>
+    <dimen name="text_size_big">22sp</dimen>
+    <dimen name="text_size_ext_big">26sp</dimen>
+    <dimen name="text_size_huge">32sp</dimen>
 </resources>

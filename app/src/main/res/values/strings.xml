@@ -37,4 +37,14 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="button_open_notification_message">Show notification!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_fragment_text">This is First Fragment</string>
+    <string name="second_fragment_text">This is Second Fragment</string>
+    <string name="first_text">First</string>
+    <string name="second_text">Second</string>
+    <string name="search_text">Search</string>
+    <string name="entry_text">Entry</string>
+    <string name="open_drawer">Opend drawer</string>
+    <string name="close_drawer">Close drawer</string>
 </resources>

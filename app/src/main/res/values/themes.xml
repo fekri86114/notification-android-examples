@@ -1,9 +1,92 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.AndroidXml" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Theme.AndroidXml" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
+        <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.AndroidXml" parent="Base.Theme.AndroidXml" />
+    <!--  Base style  -->
+    <style name="BaseStyle.Normal" parent="Theme.AndroidXml">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!--  Large style  -->
+    <style name="BaseStyle.Normal.LargeLight" parent="BaseStyle.Normal">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="BaseStyle.Normal.LargeDark" parent="BaseStyle.Normal">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="BaseStyle.Normal.LargeExtLight" parent="BaseStyle.Normal.LargeLight">
+        <item name="android:textSize">@dimen/text_size_ext_large</item>
+    </style>
+    <style name="BaseStyle.Normal.LargeExtDark" parent="BaseStyle.Normal.LargeDark">
+        <item name="android:textSize">@dimen/text_size_ext_large</item>
+    </style>
+    <style name="BaseStyle.Normal.LargeBigLight" parent="BaseStyle.Normal.LargeLight">
+        <item name="android:textSize">@dimen/text_size_big</item>
+    </style>
+    <style name="BaseStyle.Normal.LargeBigDark" parent="BaseStyle.Normal.LargeDark">
+        <item name="android:textSize">@dimen/text_size_big</item>
+    </style>
+    <style name="BaseStyle.Normal.LargeExtBigLight" parent="BaseStyle.Normal.LargeLight">
+        <item name="android:textSize">@dimen/text_size_ext_big</item>
+    </style>
+    <style name="BaseStyle.Normal.LargeExtBigDark" parent="BaseStyle.Normal.LargeDark">
+        <item name="android:textSize">@dimen/text_size_ext_big</item>
+    </style>
+    <style name="BaseStyle.Normal.LargeHugeLight" parent="BaseStyle.Normal.LargeLight">
+        <item name="android:textSize">@dimen/text_size_huge</item>
+    </style>
+    <style name="BaseStyle.Normal.LargeHugeDark" parent="BaseStyle.Normal.LargeDark">
+        <item name="android:textSize">@dimen/text_size_huge</item>
+    </style>
+
+    <!--  Bold style  -->
+    <style name="BaseStyle.Normal.BoldNormalLight" parent="BaseStyle.Normal">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="BaseStyle.Normal.BoldNormalDark" parent="BaseStyle.Normal">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BaseStyle.Normal.BoldLargeLight" parent="BaseStyle.Normal.BoldNormalLight">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+    <style name="BaseStyle.Normal.BoldLargeDark" parent="BaseStyle.Normal.BoldNormalDark">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+    <style name="BaseStyle.Normal.BoldExtLargeLight" parent="BaseStyle.Normal.BoldNormalLight">
+        <item name="android:textSize">@dimen/text_size_ext_large</item>
+    </style>
+    <style name="BaseStyle.Normal.BoldExtLargeDark" parent="BaseStyle.Normal.BoldNormalDark">
+        <item name="android:textSize">@dimen/text_size_ext_large</item>
+    </style>
+    <style name="BaseStyle.Normal.BoldHugeLargeLight" parent="BaseStyle.Normal.BoldNormalLight">
+        <item name="android:textSize">@dimen/text_size_huge</item>
+    </style>
+    <style name="BaseStyle.Normal.BoldHugeLargeDark" parent="BaseStyle.Normal.BoldNormalDark">
+        <item name="android:textSize">@dimen/text_size_huge</item>
+    </style>
+
 </resources>
