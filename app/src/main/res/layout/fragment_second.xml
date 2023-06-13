@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:fitsSystemWindows="true"
-    tools:context=".ui.fragment.SecondFragment">
+    tools:context=".ui.features.secondScreen.SecondFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/BaseStyle.Normal.BoldHugeLargeDark"

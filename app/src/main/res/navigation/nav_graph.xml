@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/first_screen"
-        android:name="info.fekri.androidxml.ui.fragment.FirstFragment"
+        android:name="info.fekri.androidxml.ui.features.firstScreen.FirstFragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_first" />
 
     <fragment
         android:id="@+id/second_screen"
-        android:name="info.fekri.androidxml.ui.fragment.SecondFragment"
+        android:name="info.fekri.androidxml.ui.features.secondScreen.SecondFragment"
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" />
 

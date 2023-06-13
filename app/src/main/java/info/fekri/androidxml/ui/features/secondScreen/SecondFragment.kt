@@ -1,4 +1,4 @@
-package info.fekri.androidxml.ui.fragment
+package info.fekri.androidxml.ui.features.secondScreen
 
 import android.os.Bundle
 import android.view.LayoutInflater

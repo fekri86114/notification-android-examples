@@ -47,4 +47,6 @@
     <string name="entry_text">Entry</string>
     <string name="open_drawer">Opend drawer</string>
     <string name="close_drawer">Close drawer</string>
+    <string name="save">Saves</string>
+    <string name="error_text">Something went wrong!</string>
 </resources>

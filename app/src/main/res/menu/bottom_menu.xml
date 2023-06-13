@@ -6,6 +6,6 @@
         android:title="@string/first_text" />
     <item
         android:id="@+id/second_screen"
-        android:icon="@drawable/ic_home"
-        android:title="@string/second_text" />
+        android:icon="@drawable/ic_save_item"
+        android:title="@string/save" />
 </menu>

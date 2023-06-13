@@ -5,12 +5,22 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:gravity="center"
-    tools:context=".ui.fragment.FirstFragment">
+    android:orientation="vertical"
+    tools:context=".ui.features.firstScreen.FirstFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/BaseStyle.Normal.BoldHugeLargeDark"
+        android:id="@+id/txt_first_show_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/first_fragment_text" />
+        tools:text="Error message"
+        style="@style/BaseStyle.Normal.Error"
+        android:visibility="gone"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_main_first_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_recycler_first_screen"
+        android:paddingBottom="@dimen/margin_0x"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

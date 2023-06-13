@@ -1,4 +1,4 @@
-package info.fekri.androidxml.ui
+package info.fekri.androidxml.ui.activity
 
 import android.content.Intent
 import android.net.Uri
@@ -18,10 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
