@@ -3,6 +3,7 @@ package info.fekri.androidxml
 import android.Manifest.permission.RECORD_AUDIO
 import android.content.ContentValues
 import android.content.pm.PackageManager
+import android.media.MediaActionSound
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -31,6 +32,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -80,8 +82,14 @@ class MainActivity : AppCompatActivity() {
             }
 
             // Set up the listeners for take photo and video capture buttons
-            imageCaptureButton.setOnClickListener { takePhoto() }
-            videoCaptureButton.setOnClickListener { captureVideo() }
+            imageCaptureButton.setOnClickListener {
+                shuttleVolume()
+                takePhoto()
+            }
+            videoCaptureButton.setOnClickListener {
+                videoVolume()
+                captureVideo()
+            }
             changeCameraViewButton.setOnClickListener {
                 isBackSelected = !isBackSelected
 
@@ -96,6 +104,16 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private fun shuttleVolume() {
+        val sound = MediaActionSound()
+        sound.play(MediaActionSound.SHUTTER_CLICK)
+    }
+
+    private fun videoVolume(mode: Int = MediaActionSound.START_VIDEO_RECORDING) {
+        val sound = MediaActionSound()
+        sound.play(MediaActionSound.START_VIDEO_RECORDING)
     }
 
     override fun onDestroy() {
@@ -143,6 +161,7 @@ class MainActivity : AppCompatActivity() {
                 when (recordEvent) {
                     is VideoRecordEvent.Start -> {
                         binding.videoCaptureButton.apply {
+                            videoVolume(MediaActionSound.STOP_VIDEO_RECORDING)
                             setIconResource(R.drawable.ic_puase_circle)
                             isEnabled = true
                         }
