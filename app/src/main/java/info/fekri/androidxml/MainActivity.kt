@@ -11,8 +11,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
-import androidx.camera.core.CameraX
-import androidx.camera.core.CameraXConfig
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
@@ -92,7 +90,6 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     startCamera(CameraSelector.DEFAULT_FRONT_CAMERA)
                 }
-
             }
 
             cameraExecutor = Executors.newSingleThreadExecutor()
@@ -216,7 +213,24 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun startCamera(cameraView: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA) {
+    /**
+     * "[CameraSelector.DEFAULT_BACK_CAMERA] = Background camera"
+     *
+     * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+     *
+     * [startCamera] is used to start the camera. The function startCamera takes an optional parameter cameraSelector which is set to [CameraSelector.DEFAULT_BACK_CAMERA] by default.
+     *
+     * The function starts by creating a [ProcessCameraProvider] instance using the `getInstance()` method. The `addListener()` method is then called on the `cameraProviderFuture` object to add a listener that will be notified when the camera provider is ready.
+     *
+     * Once the camera provider is ready, the function creates a [Preview] object using the `Preview.Builder()` method. The preview is then set up to display on the screen using the `setSurfaceProvider()` method.
+     *
+     * Next, a [Recorder] object is created using the `Recorder.Builder()` method. The quality of the video capture is set using the `setQualitySelector()` method with the highest quality and fallback strategy set to higher quality than SD. A [VideoCapture] object is then created using the `VideoCapture.withOutput()` method with the recorder as an argument.
+     *
+     * An [ImageCapture] object is also created using the `ImageCapture.Builder()` method.
+     *
+     * Finally, the use cases are bound to the camera using the `bindToLifecycle()` method of the camera provider object. If there is an exception during this process, it will be caught and logged.
+     * */
+    private fun startCamera(cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
         cameraProviderFuture.addListener({
@@ -242,10 +256,6 @@ class MainActivity : AppCompatActivity() {
 
             imageCapture = ImageCapture.Builder().build()
 
-            // Select back camera as a default
-            // TODO("Change the camera UI")
-            val cameraSelector = cameraView
-
             try {
                 // Unbind use cases before rebinding
                 cameraProvider.unbindAll()
@@ -267,7 +277,5 @@ class MainActivity : AppCompatActivity() {
     private fun requestPermissions() {
         activityResultLauncher.launch(REQUIRED_PERMISSIONS)
     }
-
-
 
 }
