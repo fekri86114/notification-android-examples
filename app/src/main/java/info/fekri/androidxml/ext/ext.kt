@@ -1,5 +1,6 @@
 package info.fekri.androidxml.ext
 
+import android.content.Context
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

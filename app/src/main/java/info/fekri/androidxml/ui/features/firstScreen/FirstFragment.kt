@@ -6,22 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import info.fekri.androidxml.databinding.FragmentFirstBinding
-import info.fekri.androidxml.ext.asyncRequest
 import info.fekri.androidxml.model.data.TvMazeItem
 import info.fekri.androidxml.model.net.ApiManager
-import io.reactivex.SingleObserver
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 
-class FirstFragment : Fragment(), FirstRecyclerAdapter.PersonEvent, ApiManager.ServerEvent<List<TvMazeItem>> {
+class FirstFragment : Fragment(), FirstRecyclerAdapter.PersonEvent,
+    ApiManager.ServerEvent<List<TvMazeItem>> {
 
     private lateinit var binding: FragmentFirstBinding
     private val apiManager: ApiManager = ApiManager()
     private val compositeDisposable = CompositeDisposable()
+    private lateinit var mAdapter: FirstRecyclerAdapter
 
     companion object {
         private const val TAG = "FirstFragment"
@@ -37,9 +37,7 @@ class FirstFragment : Fragment(), FirstRecyclerAdapter.PersonEvent, ApiManager.S
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         apiManager.getPersons(this, compositeDisposable)
-
     }
 
     override fun onDestroy() {
@@ -48,18 +46,11 @@ class FirstFragment : Fragment(), FirstRecyclerAdapter.PersonEvent, ApiManager.S
     }
 
     private fun setupData(data: ArrayList<TvMazeItem>) {
-        val adapter = FirstRecyclerAdapter(data, this)
-        val layoutManager= LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        mAdapter = FirstRecyclerAdapter(data, this)
+        val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        binding.recyclerMainFirstScreen.adapter = adapter
+        binding.recyclerMainFirstScreen.adapter = mAdapter
         binding.recyclerMainFirstScreen.layoutManager = layoutManager
-    }
-
-    override fun onPersonClicked(movieItem: TvMazeItem) {
-        // handle the click
-    }
-    override fun onPersonLongClicked(movieItem: TvMazeItem) {
-        // handle the click
     }
 
     override fun onError(msg: String) {
@@ -72,8 +63,27 @@ class FirstFragment : Fragment(), FirstRecyclerAdapter.PersonEvent, ApiManager.S
         }
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
+
     override fun onSuccess(data: List<TvMazeItem>) {
         setupData(ArrayList(data))
+    }
+
+    override fun onPersonClicked(personItem: TvMazeItem, position: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPersonLongClicked(personItem: TvMazeItem, position: Int) {
+        // remove item when long clicked:
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setTitle("Remove Item")
+        dialog.setMessage("Do you really want to remove this item?")
+
+        dialog.setPositiveButton("Yes") { dialog, _ ->
+            dialog.dismiss()
+
+            mAdapter.deleteItem(personItem, position)
+        }
+        dialog.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
     }
 
 }

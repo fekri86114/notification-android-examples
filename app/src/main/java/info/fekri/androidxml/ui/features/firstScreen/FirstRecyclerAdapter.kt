@@ -16,26 +16,26 @@ class FirstRecyclerAdapter(
     private lateinit var binding: ItemRecyclerFirstScreenBinding
 
     inner class FirstRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(data: TvMazeItem) {
+        fun bind(position: Int) {
             binding.apply {
 
-                txtFirstName.text = data.person.name
-                txtFirstGender.text = data.person.gender
-                txtFirstBirthday.text = data.person.birthday
-                txtFirstNationality.text = data.person.country.name
+                txtFirstName.text = data[position].person.name
+                txtFirstGender.text = data[position].person.gender
+                txtFirstBirthday.text = data[position].person.birthday
+                txtFirstNationality.text = data[position].person.country.name
 
                 Picasso.get()
-                    .load(data.character.image.original)
+                    .load(data[position].character.image.original)
                     .error(R.drawable.broken_img)
                     .into(imgFirstPerson)
 
             }
 
             itemView.setOnClickListener {
-                personEvent.onPersonClicked(data)
+                personEvent.onPersonClicked(data[adapterPosition], adapterPosition)
             }
             itemView.setOnLongClickListener {
-                personEvent.onPersonLongClicked(data)
+                personEvent.onPersonLongClicked(data[adapterPosition], adapterPosition)
                 true
             }
         }
@@ -48,15 +48,20 @@ class FirstRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: FirstRecyclerViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(position)
     }
 
     override fun getItemCount(): Int = data.size
 
+    fun deleteItem(oldPerson: TvMazeItem, oldPosition: Int) {
+        data.remove(oldPerson)
+        notifyItemRemoved( oldPosition )
+    }
+
 
     interface PersonEvent {
-        fun onPersonClicked(movieItem: TvMazeItem)
-        fun onPersonLongClicked(movieItem: TvMazeItem)
+        fun onPersonClicked(personItem: TvMazeItem, position: Int)
+        fun onPersonLongClicked(personItem: TvMazeItem, position: Int)
     }
 
 }
