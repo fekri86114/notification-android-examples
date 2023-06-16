@@ -1,13 +1,13 @@
 package info.fekri.androidxml.model.net
 
-import info.fekri.androidxml.model.data.TvMaze
 import info.fekri.androidxml.model.data.TvMazeItem
-import retrofit2.Call
+import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.GET
 
 interface ApiService {
 
     @GET("/shows/1/cast")
-    fun getPersons(): Call<TvMazeItem>
+    fun getPersons(): Single<List<TvMazeItem>>
 
 }

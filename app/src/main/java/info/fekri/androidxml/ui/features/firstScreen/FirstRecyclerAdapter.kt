@@ -9,11 +9,13 @@ import info.fekri.androidxml.R
 import info.fekri.androidxml.databinding.ItemRecyclerFirstScreenBinding
 import info.fekri.androidxml.model.data.TvMazeItem
 
-class FirstRecyclerAdapter(private val data: ArrayList<TvMazeItem>):
-    RecyclerView.Adapter<FirstRecyclerAdapter.FirstRecyclerViewHolder>() {
+class FirstRecyclerAdapter(
+    private val data: ArrayList<TvMazeItem>,
+    private val personEvent: PersonEvent
+) : RecyclerView.Adapter<FirstRecyclerAdapter.FirstRecyclerViewHolder>() {
     private lateinit var binding: ItemRecyclerFirstScreenBinding
 
-    inner class FirstRecyclerViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
+    inner class FirstRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(data: TvMazeItem) {
             binding.apply {
 
@@ -27,6 +29,14 @@ class FirstRecyclerAdapter(private val data: ArrayList<TvMazeItem>):
                     .error(R.drawable.broken_img)
                     .into(imgFirstPerson)
 
+            }
+
+            itemView.setOnClickListener {
+                personEvent.onPersonClicked(data)
+            }
+            itemView.setOnLongClickListener {
+                personEvent.onPersonLongClicked(data)
+                true
             }
         }
     }
@@ -42,5 +52,11 @@ class FirstRecyclerAdapter(private val data: ArrayList<TvMazeItem>):
     }
 
     override fun getItemCount(): Int = data.size
+
+
+    interface PersonEvent {
+        fun onPersonClicked(movieItem: TvMazeItem)
+        fun onPersonLongClicked(movieItem: TvMazeItem)
+    }
 
 }
